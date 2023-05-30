@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController; // untuk mendaftarkan user controler
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartementController;
+use App\Models\Workshop;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\WorkDay;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::middleware('auth')->group(
     Route::resource('user', UserController::class);
     Route::get('users/export-pdf', [UserController::class, 'exportPdf'])->name('users.export-Pdf');
     
+    Route::get('search-workshop', [WorkshopsController::class],'autocomplete')->name('autocomplete');
 
         
 });
