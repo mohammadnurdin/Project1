@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
 
-class WorkshopsController extends Controller
+class WorkshopController extends Controller
 {
     public function autocomplete(Request $request)
     {

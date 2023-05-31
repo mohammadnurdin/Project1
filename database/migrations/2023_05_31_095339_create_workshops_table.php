@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('r_a_b_s', function (Blueprint $table) {
+        Schema::create('workshops', function (Blueprint $table) {
             $table->id();
-            $table->string('id_workshop')->nullable();
-            $table->string('penyusun')->nullable();
-            $table->string('tempat')->nullable();
-            $table->date('tgl')->nullable();
-            $table->string('jumlah')->nullable();
-
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('r_a_b_s');
+        Schema::dropIfExists('workshops');
     }
 };

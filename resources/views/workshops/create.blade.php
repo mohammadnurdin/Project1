@@ -1,13 +1,12 @@
-
 @extends('app')
 @section('content')
-<form action="{{ route('departements.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('rabs.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Departement Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Departement Name">
+                <strong>No TRX:</strong>
+                <input type="text" name="no_trx" class="form-control" placeholder="No TRX">
                 @error('name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -15,34 +14,62 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Location :</strong>
-                <input type="text" name="location" class="form-control" placeholder="Location">
+                <strong>Tanggal RAB :</strong>
+                <input type="date" name="tgl_rab" class="form-control" placeholder="Tanggal RAB">
                 @error('location')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
         </div>
-        <div class="form-group">
-        <label for="manager_id">Manager</label>
-        <select name="manager_id" class="form-control">
-            @foreach ($managers as $manager)
-                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
-            @endforeach
-        </select>
-    <div class="col-lg-12 margin-tb">
-            <div class="text-end mb-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-warning text-end" href="{{ route('departements.index') }}"> Back</a>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Penyusun:</strong>
+                <select name="penyusun" id="penyusun" class="form-select" >
+                        <option value="">Pilih</option>
+                        @foreach($managers as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                </select>
+                @error('alias')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
             </div>
-          </div>
- </div>
+        </div>
+        <div class="row col-xs-12 col-sm-12 col-md-12 mt-3">
+            <div class="col-md-10 form-group">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Masukan Nama / Kode Product">
+                @error('name')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-md-2 form-group text-center">
+                <button class="btn btn-secondary" type="button" name="btnAdd" id="btnAdd"><i class="fa fa-plus"></i>Tambah</button>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">QTY</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Sub Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
+    </div>
 </form>
 @endsection
 @section('js')
 <script type="text/javascript">
-    var path = "{{ route('search.workshop') }}";
+    var path = "{{ route('search.product') }}";
   
-    $( "#search" ).autocomplete({
+    $("#search").autocomplete({
         source: function( request, response ) {
           $.ajax({
             url: path,
